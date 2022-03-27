@@ -1,0 +1,2 @@
+[mycluster]
+192.168.0.29 ansible_ssh_pass=123456 ansible_ssh_user=root
