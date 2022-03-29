@@ -1,6 +1,6 @@
 ---
 - name: Install Dynatrace Monitoring tool
-  hosts: mycluster
+  hosts: mycluster 
   tasks:
     - name: Create a directory if it does not exist
       file:
