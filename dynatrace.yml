@@ -1,0 +1,25 @@
+---
+- name: Install Dynatrace Monitoring tool
+  hosts: fasteasy 
+  tasks:
+    - name: Create a directory if it does not exist
+      file:
+        path: /monitor/dynatrace/
+        state: directory
+        mode: '0755'
+
+    - name: Copy Binary files to target machine
+      ansible.builtin.copy:
+        src: /tmp/Dynatrace-OneAgent-Linux-1.231.245.sh
+        dest: /monitor/Dynatrace-OneAgent-Linux-1.231.245.sh
+        owner: root
+        group: root
+        mode: '0644'
+  
+    - name: Install dynatrace
+      shell: /bin/sh /monitor/Dynatrace-OneAgent-Linux-1.231.245.sh INSTALL_PATH=/monitor/dynatrace --set-infra-only=true --set-network-zone=non-prod --set-host-group=FastEASY_UAT
+
+    - name: Remove Installation file (delete file)
+      file:
+        path: /monitor/Dynatrace-OneAgent-Linux-1.231.245.sh
+        state: absent  
